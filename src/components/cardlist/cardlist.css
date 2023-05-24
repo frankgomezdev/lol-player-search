@@ -1,0 +1,36 @@
+.card-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    width: 100px;
+  }
+  
+  .card {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  
+  .card img {
+    align-self: center;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .card h2 {
+    font-size: 1rem;
+    margin: 10px;
+  }
+  
+  .card p {
+    font-size: 0.8rem;
+    margin: 10px;
+  }
+  
+
