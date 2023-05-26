@@ -1,5 +1,11 @@
 # Notes
 
-1. Using (/lol/summoner/v4/summoners/by-name/{summonerName}) will retrieve the "id" which is the encryptedSummonerID that can be used in other calls to receive more data. Next step is to figure out how to call (/lol/league/v4/entries/by-summoner/{encryptedSummonerId}) after the original call to get Ranked Match data per summoner.
+Due 5/30
 
-2. Using the BasicCard component from MaterialUI to display the data once the information is retrieved and how to set it up.
+- Add .env file
+- reference API Keys in .env file
+- git ignore .env file 
+- Push latest to repo and share repo with Matt... 
+- Bring in material UI toast component and trigger it based on API success/failure
+- Create another "page" in the app - name it something.  Use accordion component from Material UI to document (very briefly) the list of components in your app... (Component Name title - brief description in the body) - could also do Lorem Ipsum if you like
+- Matt to pull the repo and implement context piece
