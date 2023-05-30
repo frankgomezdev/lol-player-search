@@ -1,0 +1,8 @@
+.content {
+    display: flex;
+    margin-left: 15%;
+    width: calc(85% - 20px);
+    background-color: white;
+    padding: 10px;
+    overflow-y: auto;
+}
