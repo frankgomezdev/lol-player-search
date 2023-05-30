@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from "./Summoner.module.css";
-import { Button } from "@mui/material";
+import { Button, Snackbar } from "@mui/material";
 import { Context } from "../../contexts/context";
-import { IS_MATT_LOCAL } from "../../constants/environment";
+import MuiAlert from "@mui/material/Alert";
+import IS_MATT_LOCAL from "src/constants/environment.js"
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function SummonerSearch() {
- 
   const [summonerName, setSummonerName] = useState();
   const [summonerData, setSummonerData] = useState();
   const [profileId, setProfileId] = useState();
   const [profileData, setProfileData] = useState();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const [snackbarMessage, setSnackbarMessage] = useState();
   const API_KEY = process.env.REACT_APP_API_KEY;
   const baseUrl =
     "https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com//lol/";
@@ -46,11 +53,24 @@ function SummonerSearch() {
     axios
       .get(APICallString)
       .then((response) => {
-        setSummonerData(response.data);
-        setProfileId(response.data.id);
+        console.log(response.data);
+        if (response.data.name.length > 0) {
+          setSummonerData(response.data);
+          setProfileId(response.data.id);
+          setOpenSnackbar(true);
+          setSnackbarSeverity("success");
+          setSnackbarMessage("Summoner found!");
+        } else {
+          setOpenSnackbar(true);
+          setSnackbarSeverity("error");
+          setSnackbarMessage("No summoner found!");
+        }
       })
       .catch((error) => {
         console.log(error);
+        setOpenSnackbar(true);
+        setSnackbarSeverity("error");
+        setSnackbarMessage("An error occurred while fetching data.");
       });
   };
 
@@ -70,6 +90,10 @@ function SummonerSearch() {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
   };
 
   return (
@@ -93,6 +117,15 @@ function SummonerSearch() {
         >
           Search Summoner
         </Button>
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={6000}
+          onClose={handleCloseSnackbar}
+        >
+          <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity}>
+            {snackbarMessage}
+          </Alert>
+        </Snackbar>
         {summonerData?.name && (
           <div>
             <h2>{summonerData.name}</h2>

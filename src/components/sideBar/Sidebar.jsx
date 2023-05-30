@@ -16,6 +16,9 @@ const sidebarData = useContext(Context)
         <li>
           <Link to="/summonersearch">Player Search</Link>
         </li>
+        <li>
+          <Link to="/componentlist">Component List</Link>
+        </li>
       </ul>
       {sidebarData}
     </div>
