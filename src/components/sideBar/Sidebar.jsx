@@ -1,11 +1,15 @@
 import React, { useContext } from "react";
 import "./sidebar.css";
 import { Link } from "react-router-dom";
-import { Context } from "../../contexts/context";
+import { CurrentSummonerContext } from "../../App";
+// import { Context } from "../../contexts/context";
 
 function SideBar() {
 
-const sidebarData = useContext(Context)
+// const sidebarData = useContext(Context)
+const {
+  currentSommoner
+} = useContext(CurrentSummonerContext);
 
   return (
     <div className="sidebar">
@@ -20,7 +24,7 @@ const sidebarData = useContext(Context)
           <Link to="/componentlist">Component List</Link>
         </li>
       </ul>
-      {sidebarData}
+      {currentSommoner && <div><h2>Sommoner: {currentSommoner.name}</h2></div>}
     </div>
   );
 }
