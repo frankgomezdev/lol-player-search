@@ -1,16 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import {IS_MATT_LOCAL} from '../../constants/environment';
 import styles from "./Summoner.module.css";
 import { Button, Snackbar } from "@mui/material";
 import { Context } from "../../contexts/context";
 import MuiAlert from "@mui/material/Alert";
-import IS_MATT_LOCAL from "src/constants/environment.js"
+import { CurrentSummonerContext } from "../../App";
+
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 function SummonerSearch() {
+
+  const {
+    setcurrentSommoner
+  } = useContext(CurrentSummonerContext);
+
   const [summonerName, setSummonerName] = useState();
   const [summonerData, setSummonerData] = useState();
   const [profileId, setProfileId] = useState();
@@ -27,11 +34,12 @@ function SummonerSearch() {
   };
 
   const spoofSommonerSearch = () => {
-    setSummonerData({
-      name: "TEST PLAYER",
+    const mockSummoner = {
+      name: summonerName,
       summonerLevel: "42",
-    });
-    setSummonerName("TEST PLAYER");
+    }
+    setSummonerData(mockSummoner);
+    setcurrentSommoner(mockSummoner);
   };
 
   const spoofHandleProfileSearch = () => {
