@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import SummonerData from "./components/summonerData/SummonerData";
 import Layout from "./components/Layout/Layout";
 import HomePage from "./pages/HomePage";
 import SummonerSearch from "./pages/SummonerPage/SummonerSearch";
