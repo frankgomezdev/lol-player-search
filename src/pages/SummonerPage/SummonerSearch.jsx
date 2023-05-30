@@ -1,22 +1,18 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import {IS_MATT_LOCAL} from '../../constants/environment';
+import { IS_MATT_LOCAL } from "../../constants/environment";
 import styles from "./Summoner.module.css";
 import { Button, Snackbar } from "@mui/material";
 import { Context } from "../../contexts/context";
 import MuiAlert from "@mui/material/Alert";
 import { CurrentSummonerContext } from "../../App";
 
-
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 function SummonerSearch() {
-
-  const {
-    setcurrentSommoner
-  } = useContext(CurrentSummonerContext);
+  const { setcurrentSommoner } = useContext(CurrentSummonerContext);
 
   const [summonerName, setSummonerName] = useState();
   const [summonerData, setSummonerData] = useState();
@@ -37,7 +33,7 @@ function SummonerSearch() {
     const mockSummoner = {
       name: summonerName,
       summonerLevel: "42",
-    }
+    };
     setSummonerData(mockSummoner);
     setcurrentSommoner(mockSummoner);
   };
@@ -62,23 +58,22 @@ function SummonerSearch() {
       .get(APICallString)
       .then((response) => {
         console.log(response.data);
-        if (response.data.name.length > 0) {
-          setSummonerData(response.data);
-          setProfileId(response.data.id);
-          setOpenSnackbar(true);
-          setSnackbarSeverity("success");
-          setSnackbarMessage("Summoner found!");
-        } else {
+        setSummonerData(response.data);
+        setProfileId(response.data.id);
+        setOpenSnackbar(true);
+        setSnackbarSeverity("success");
+        setSnackbarMessage("Summoner found!");
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
           setOpenSnackbar(true);
           setSnackbarSeverity("error");
           setSnackbarMessage("No summoner found!");
+        } else {
+          setOpenSnackbar(true);
+          setSnackbarSeverity("error");
+          setSnackbarMessage("An error occurred while fetching data.");
         }
-      })
-      .catch((error) => {
-        console.log(error);
-        setOpenSnackbar(true);
-        setSnackbarSeverity("error");
-        setSnackbarMessage("An error occurred while fetching data.");
       });
   };
 
