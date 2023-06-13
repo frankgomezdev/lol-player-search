@@ -6,15 +6,16 @@ import HomePage from "./pages/HomePage";
 import SummonerSearch from "./pages/SummonerPage/SummonerSearch";
 import ComponentListPage from "./pages/ComponentListPage/ComponentList";
 
+// export const CurrentSummonerContext = createContext(null);
 export const CurrentSummonerContext = createContext(null);
 
 function App() {
-  const [currentSommoner, setcurrentSommoner] = useState(null);
+  const [summonerData, setSummonerData] = useState(null);
 
   return (
     <CurrentSummonerContext.Provider value={{
-      currentSommoner,
-      setcurrentSommoner
+      summonerData,
+      setSummonerData
     }}>
       <Layout>
         <Routes>

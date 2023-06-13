@@ -6,10 +6,8 @@ import { CurrentSummonerContext } from "../../App";
 
 function SideBar() {
 
-// const sidebarData = useContext(Context)
-const {
-  currentSommoner
-} = useContext(CurrentSummonerContext);
+
+const { summonerData } = useContext(CurrentSummonerContext);
 
   return (
     <div className="sidebar">
@@ -24,7 +22,7 @@ const {
           <Link to="/componentlist">Component List</Link>
         </li>
       </ul>
-      {currentSommoner && <div><h2>Sommoner: {currentSommoner.name}</h2></div>}
+      {summonerData && <div><h2>Summoner: {summonerData.name}</h2></div>}
     </div>
   );
 }

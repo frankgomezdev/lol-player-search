@@ -3,7 +3,7 @@ import axios from "axios";
 import { IS_MATT_LOCAL } from "../../constants/environment";
 import styles from "./Summoner.module.css";
 import { Button, Snackbar } from "@mui/material";
-import { Context } from "../../contexts/context";
+// import { Context } from "../../contexts/context";
 import MuiAlert from "@mui/material/Alert";
 import { CurrentSummonerContext } from "../../App";
 
@@ -12,8 +12,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 function SummonerSearch() {
-  const { setcurrentSommoner } = useContext(CurrentSummonerContext);
-
+  // const { setcurrentSommoner } = useContext(CurrentSummonerContext);
+  const { setsummonerData } = useContext(CurrentSummonerContext);
   const [summonerName, setSummonerName] = useState();
   const [summonerData, setSummonerData] = useState();
   const [profileId, setProfileId] = useState();
@@ -35,7 +35,7 @@ function SummonerSearch() {
       summonerLevel: "42",
     };
     setSummonerData(mockSummoner);
-    setcurrentSommoner(mockSummoner);
+    // setcurrentSommoner(mockSummoner);
   };
 
   const spoofHandleProfileSearch = () => {
@@ -100,7 +100,6 @@ function SummonerSearch() {
   };
 
   return (
-    <Context.Provider value={{ summonerData }}>
       <div className={styles.container}>
         <h1>League of Legend Player Search</h1>
         <label>
@@ -166,7 +165,6 @@ function SummonerSearch() {
           </div>
         )}
       </div>
-    </Context.Provider>
   );
 }
 
