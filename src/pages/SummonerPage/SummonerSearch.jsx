@@ -5,7 +5,7 @@ import styles from "./Summoner.module.css";
 import { Button, Snackbar } from "@mui/material";
 // import { Context } from "../../contexts/context";
 import MuiAlert from "@mui/material/Alert";
-import { CurrentSummonerContext } from "../../App";
+import { CurrentSummonerContext, SummonerDispatchContext } from "../../App";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -13,14 +13,14 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 function SummonerSearch() {
   // const { setcurrentSommoner } = useContext(CurrentSummonerContext);
-  const { setsummonerData } = useContext(CurrentSummonerContext);
+  const { setSummonerState } = useContext(SummonerDispatchContext);
   const [summonerName, setSummonerName] = useState();
   const [summonerData, setSummonerData] = useState();
   const [profileId, setProfileId] = useState();
   const [profileData, setProfileData] = useState();
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
-  const [snackbarMessage, setSnackbarMessage] = useState();
+  // const [openSnackbar, setOpenSnackbar] = useState(false);
+  // const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  // const [snackbarMessage, setSnackbarMessage] = useState();
   const API_KEY = process.env.REACT_APP_API_KEY;
   const baseUrl =
     "https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com//lol/";
@@ -35,7 +35,7 @@ function SummonerSearch() {
       summonerLevel: "42",
     };
     setSummonerData(mockSummoner);
-    // setcurrentSommoner(mockSummoner);
+    setSummonerState(mockSummoner);
   };
 
   const spoofHandleProfileSearch = () => {
@@ -60,19 +60,19 @@ function SummonerSearch() {
         console.log(response.data);
         setSummonerData(response.data);
         setProfileId(response.data.id);
-        setOpenSnackbar(true);
-        setSnackbarSeverity("success");
-        setSnackbarMessage("Summoner found!");
+        // setOpenSnackbar(true);
+        // setSnackbarSeverity("success");
+        // setSnackbarMessage("Summoner found!");
       })
       .catch((error) => {
         if (error.response.status === 404) {
-          setOpenSnackbar(true);
-          setSnackbarSeverity("error");
-          setSnackbarMessage("No summoner found!");
+          // setOpenSnackbar(true);
+          // setSnackbarSeverity("error");
+          // setSnackbarMessage("No summoner found!");
         } else {
-          setOpenSnackbar(true);
-          setSnackbarSeverity("error");
-          setSnackbarMessage("An error occurred while fetching data.");
+          // setOpenSnackbar(true);
+          // setSnackbarSeverity("error");
+          // setSnackbarMessage("An error occurred while fetching data.");
         }
       });
   };
@@ -95,9 +95,9 @@ function SummonerSearch() {
       });
   };
 
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-  };
+  // const handleCloseSnackbar = () => {
+  //   setOpenSnackbar(false);
+  // };
 
   return (
       <div className={styles.container}>
@@ -119,7 +119,7 @@ function SummonerSearch() {
         >
           Search Summoner
         </Button>
-        <Snackbar
+        {/* <Snackbar
           open={openSnackbar}
           autoHideDuration={6000}
           onClose={handleCloseSnackbar}
@@ -127,7 +127,7 @@ function SummonerSearch() {
           <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity}>
             {snackbarMessage}
           </Alert>
-        </Snackbar>
+        </Snackbar> */}
         {summonerData?.name && (
           <div>
             <h2>{summonerData.name}</h2>

@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import "./sidebar.css";
 import { Link } from "react-router-dom";
-import { CurrentSummonerContext } from "../../App";
+import { SummonerStateContext } from "../../App";
 // import { Context } from "../../contexts/context";
 
 function SideBar() {
 
 
-const { summonerData } = useContext(CurrentSummonerContext);
+const { summonerState } = useContext(SummonerStateContext);
 
   return (
     <div className="sidebar">
@@ -22,7 +22,7 @@ const { summonerData } = useContext(CurrentSummonerContext);
           <Link to="/componentlist">Component List</Link>
         </li>
       </ul>
-      {summonerData && <div><h2>Summoner: {summonerData.name}</h2></div>}
+      {summonerState && <div><h2>Summoner: {summonerState.name}</h2></div>}
     </div>
   );
 }

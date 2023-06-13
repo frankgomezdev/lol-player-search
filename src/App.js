@@ -7,24 +7,31 @@ import SummonerSearch from "./pages/SummonerPage/SummonerSearch";
 import ComponentListPage from "./pages/ComponentListPage/ComponentList";
 
 // export const CurrentSummonerContext = createContext(null);
-export const CurrentSummonerContext = createContext(null);
+export const SummonerStateContext = createContext(null);
+export const SummonerDispatchContext = createContext(null);
+
 
 function App() {
-  const [summonerData, setSummonerData] = useState(null);
+  const [summonerState, setSummonerState] = useState(null);
 
   return (
-    <CurrentSummonerContext.Provider value={{
-      summonerData,
-      setSummonerData
-    }}>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/summonersearch" element={<SummonerSearch />} />
-          <Route path="/componentlist" element={<ComponentListPage />} />
-        </Routes>
-      </Layout>
-    </CurrentSummonerContext.Provider>
+    <SummonerStateContext.Provider
+      value={{
+        summonerState,
+      }}
+    >
+      <SummonerDispatchContext.Provider value={{
+        setSummonerState
+      }}>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/summonersearch" element={<SummonerSearch />} />
+            <Route path="/componentlist" element={<ComponentListPage />} />
+          </Routes>
+        </Layout>
+      </SummonerDispatchContext.Provider>
+    </SummonerStateContext.Provider>
   );
 }
 
